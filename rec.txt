@@ -1,0 +1,2 @@
+babel   对es6处理
+babel-preset-react  对react处理
