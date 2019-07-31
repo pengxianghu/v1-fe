@@ -2,29 +2,52 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Link, Route, Switch, Redirect } from 'react-router-dom';
 
-// import 'font-awesome/css/font-awesome.min.css';
-import './index.css';
-import Home from './component/home/home.jsx';
-import Login from './component/login/login.jsx';
+import Home from 'page/home/home.jsx';
+import Login from 'page/login/login.jsx';
+import Error from 'page/error/index.jsx';
+import Layout from 'component/layout/index.jsx';
+import Schedule from 'page/schedule/index.jsx';
+import User from 'page/user/index.jsx';
 
-ReactDOM.render(
-    <div>
-        <Router>
-            <div>
-                <div>
-                    <Link to="/">Home</Link>
-                </div>
-                <div>
-                    <Link to="/login">login</Link>
-                </div>
-                <hr />
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import 'component/layout/theme.css';
+import './index.css';
+
+class App extends React.Component {
+    render() {
+
+        let LayoutRouter = (
+            <Layout>
                 <Switch>
                     <Route exact path="/" component={Home} />
-                    <Route path="/login" component={Login} />
-                    <Redirect from="*"  to="/"/>
+                    <Route path="/todolist" component={Home} />
+                    <Route path="/user" component={Home} />
+                    <Route component={Error} />
                 </Switch>
-            </div>
-        </Router>
-    </div>,
+            </Layout>
+        );
+
+        return (
+            <Router>
+                <div>
+                    <Layout>
+                        <Switch>
+                            <Route path="/login" component={Login} />
+                            {/* <Route exact path="/" render={props => LayoutRouter} /> */}
+                            <Route exact path="/" component={Home} />
+                            <Route path="/schedule" component={Schedule} />
+                            <Route path="/user" component={User} />
+                            <Route component={Error} />
+                        </Switch>
+                    </Layout>
+                </div>
+            </Router>
+        );
+    }
+}
+
+
+ReactDOM.render(
+    <App />,
     document.getElementById('app')
 )
