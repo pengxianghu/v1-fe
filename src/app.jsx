@@ -16,36 +16,21 @@ import './index.css';
 class App extends React.Component {
     render() {
 
-        let LayoutRouter = (
-            <Layout>
-                <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route path="/todolist" component={Home} />
-                    <Route path="/user" component={Home} />
-                    <Route component={Error} />
-                </Switch>
-            </Layout>
-        );
-
         return (
             <Router>
-                <div>
-                    <Layout>
-                        <Switch>
-                            <Route path="/login" component={Login} />
-                            {/* <Route exact path="/" render={props => LayoutRouter} /> */}
-                            <Route exact path="/" component={Home} />
-                            <Route path="/schedule" component={Schedule} />
-                            <Route path="/user" component={User} />
-                            <Route component={Error} />
-                        </Switch>
-                    </Layout>
-                </div>
+                <Layout>
+                    <Switch>
+                        <Route path="/login" component={Login} />
+                        <Route exact path="/" component={Home} />
+                        <Route path="/schedule" component={Schedule} />
+                        <Route path="/user" component={User} />
+                        <Route component={Error} />
+                    </Switch>
+                </Layout>
             </Router>
         );
     }
 }
-
 
 ReactDOM.render(
     <App />,

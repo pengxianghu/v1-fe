@@ -15,12 +15,12 @@ class NavSide extends React.Component {
                         <li>
                             <NavLink exact to="/">首页</NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                             <NavLink to="/schedule">待办事项</NavLink>
                         </li>
                         <li>
                             <NavLink to="/user">用户管理</NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>

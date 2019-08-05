@@ -15,7 +15,7 @@ class Home extends React.Component {
     render() {
         return (
             <div id="page-wrapper">
-                <button className='btn btn-default'>首页</button>
+                {/* <button className='btn btn-default'>首页</button> */}
             </div>
         );
     }
