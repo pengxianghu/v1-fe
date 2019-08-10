@@ -1,6 +1,7 @@
 import React from 'react';
+import axios from 'axios';
 
-import { Link }     from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './nav-top.scss';
 
 class NavTop extends React.Component {
@@ -13,17 +14,23 @@ class NavTop extends React.Component {
 
     componentWillMount() {
         let str = sessionStorage.getItem('userInfo');
-        if(str == null) {
+        if (str == null) {
             return
         }
         var userInfo = JSON.parse(str);
         this.setState({
-            username : userInfo.name
-        });        
+            username: userInfo.name
+        });
     }
 
-    onLogout(){
-        console.log("logout func");
+    onLogout() {
+        axios.post(`/api/logout`)
+            .then(res => {
+                console.log("logout success.");
+                sessionStorage.removeItem('userInfo');
+            }).catch(err => {
+                alert('logout failed!');
+            });
     }
 
     render() {
@@ -39,14 +46,14 @@ class NavTop extends React.Component {
                             <i className="fa fa-user fa-fw"></i>
                             {
                                 this.state.username
-                                ? <span>欢迎，{this.state.username}</span>
-                                : <span>欢迎您</span>
+                                    ? <span>欢迎，{this.state.username}</span>
+                                    : <span>欢迎您</span>
                             }
                             <i className="fa fa-caret-down"></i>
                         </a>
                         <ul className="dropdown-menu dropdown-user">
                             <li>
-                                <a onClick={() => {this.onLogout()}}>
+                                <a onClick={() => { this.onLogout() }}>
                                     <i className="fa fa-sign-out fa-fw"></i>
                                     <span>退出登录</span>
                                 </a>
