@@ -84,7 +84,7 @@ p {
 
 #page-wrapper {
     position: relative;
-    top: 55px;
+    /* top: 55px; */
 }
 
 .top-navbar .nav > li > a:hover, .top-navbar .nav > li > a:focus {
@@ -108,9 +108,9 @@ p {
 /*----------------------------------------------
    DASHBOARD STYLES    
 ------------------------------------------------*/
-.page-header {
+.page-title {
     padding-bottom: 9px;
-    margin: 10px 0 20px;
+    margin: -5px 0 0;
     border-bottom: 1px solid transparent;
 }
 

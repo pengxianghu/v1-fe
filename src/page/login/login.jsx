@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-import { backendAddress } from '../../const.jsx';
-
 axios.defaults.withCredentials = true
 
 class Login extends React.Component {
@@ -31,44 +29,24 @@ class Login extends React.Component {
         console.log(this.state.name);
 
         let data = { id: "", name: this.state.name, pwd: this.state.pwd }
-        axios.post(backendAddress + `/user/` + this.state.name, data)
+        axios.post(`/api/user/` + this.state.name, data)
             .then(res => {
                 if (res.data.code == 0) {
                     let s = JSON.stringify(res.data.data);
+                    console.log("login success.");
                     sessionStorage.setItem('userInfo', s);
+                    window.location.href = "/";
                 }
+            }).catch( err => {
+                alert('用户名或密码错误!');
             });
-        // let body = JSON.stringify(data, null, 2)
-        // const init = {
-        //     method: 'POST',
-        //     mode: "no-cors",
-        //     credentials: 'include', // cookies
-        //     body: body
-        // }
-        // fetch(
-        //     'http://127.0.0.1:25001/user/' + this.state.name,
-        //     init
-        // ).then(res => res.json())
-        //     .then(r => {
-        //         console.log(r);
-        //         if (r.code == 0) {
-        //             this.setState({
-        //                 is_login: true
-        //             })
-        //             let s;
-        //             s = r.data;
-        //             sessionStorage.setItem('userInfo', "1");
-        //         }
-        //         console.log("login success.");
-        //     })
-        //     .catch(e => console.log('错误:', e))
     }
 
     checkCookie() {
-        axios.get(backendAddress + `/user/cookie`)
+        axios.get(`/api/user/cookie`)
             .then(res => {
                 console.log("check cookie");
-                // console.log(res);
+                console.log(res);
             });
     }
 

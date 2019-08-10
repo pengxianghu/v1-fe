@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 
-import { backendAddress } from '../../const.jsx';
 import PageTitle from 'component/page-title/index.jsx';
 
 import './index.scss';
@@ -27,7 +26,7 @@ class Schedule extends React.Component {
         this.setState({
             user_id: userInfo.id.slice(11)
         })
-        axios.get(backendAddress + `/schedule/` + u_id)
+        axios.get(`/api/schedule/` + u_id)
             .then(res => {
                 console.log("get schedule by user success");
                 this.setState({
@@ -53,20 +52,24 @@ class Schedule extends React.Component {
         console.log("content: " + this.state.content);
 
         let data = { id: 0, user_id: this.state.user_id, topic: this.state.topic, content: this.state.content }
-        axios.post(backendAddress + `/schedule`, data)
+        axios.post(`/api/schedule`, data)
             .then(res => {
                 if (res.data.code == 0) {
                     console.log("add schedule success.");
+                    alert('添加成功!');
+                    window.location.reload();
                 }
             });
     }
 
     deleteScheduleHandleClick(id) {
         console.log("delete schedule by id: " + id);
-        axios.delete(backendAddress + `/schedule/` + id)
+        axios.delete(`/api/schedule/` + id)
             .then(res => {
                 if(res.data.code == 0) {
                     console.log("delete schedule success.");
+                    alert('删除成功!');
+                    window.location.reload();
                 }
             });
     }

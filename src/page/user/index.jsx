@@ -1,13 +1,15 @@
-import React        from 'react';
+import React from 'react';
 
-class User extends React.Component{
-    constructor(props){
+import PageTitle from 'component/page-title/index.jsx';
+
+class User extends React.Component {
+    constructor(props) {
         super(props);
     }
-    render(){
+    render() {
         return (
             <div id="page-wrapper">
-                user management
+                <PageTitle title="用户管理" />
             </div>
         );
     }

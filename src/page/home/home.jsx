@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PageTitle from 'component/page-title/index.jsx';
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -8,14 +10,17 @@ class Home extends React.Component {
         }
     }
 
-    componentDidMount() {
-        console.log("首页");
+    componentWillMount() {
+        let str = sessionStorage.getItem('userInfo');
+        if (str == null) {
+            window.location.href = "/login";
+        }
     }
 
     render() {
         return (
             <div id="page-wrapper">
-                {/* <button className='btn btn-default'>首页</button> */}
+                <PageTitle title="主页" />
             </div>
         );
     }

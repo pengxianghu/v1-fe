@@ -15,18 +15,21 @@ import './index.css';
 
 class App extends React.Component {
     render() {
-
         return (
             <Router>
-                <Layout>
-                    <Switch>
-                        <Route path="/login" component={Login} />
-                        <Route exact path="/" component={Home} />
-                        <Route path="/schedule" component={Schedule} />
-                        <Route path="/user" component={User} />
-                        <Route component={Error} />
-                    </Switch>
-                </Layout>
+                <Switch>
+                    <Route path="/login" component={Login} />
+                    <Route path="/" render={(proos) => (
+                        <Layout>
+                            <Switch>
+                                <Route exact path="/" component={Home} />
+                                <Route path="/schedule" component={Schedule} />
+                                <Route path="/user" component={User} />
+                                <Route component={Error} />
+                            </Switch>
+                        </Layout>
+                    )} />
+                </Switch>
             </Router>
         );
     }
