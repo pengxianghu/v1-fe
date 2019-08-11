@@ -21,9 +21,6 @@ class NavSide extends React.Component {
                         <li>
                             <NavLink to="/user">用户管理</NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/login">登录</NavLink>
-                        </li>
                     </ul>
                 </div>
             </div>

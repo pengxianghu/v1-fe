@@ -32,12 +32,12 @@ class Login extends React.Component {
         axios.post(`/api/user/` + this.state.name, data)
             .then(res => {
                 if (res.data.code == 0) {
-                    let s = JSON.stringify(res.data.data);
                     console.log("login success.");
-                    sessionStorage.setItem('userInfo', s);
                     window.location.href = "/";
+                    let s = JSON.stringify(res.data.data);
+                    sessionStorage.setItem('userInfo', s);
                 }
-            }).catch( err => {
+            }).catch(err => {
                 alert('用户名或密码错误!');
             });
     }
@@ -73,8 +73,8 @@ class Login extends React.Component {
                             </div>
                             <button className="btn btn-lg btn-primary btn-block"
                                 onClick={e => { this.submitHandleClick(e) }}>登录</button>
-                            <button className="btn btn-lg btn-primary btn-block"
-                                onClick={e => { this.checkCookie(e) }}>验证cookie</button>
+                            {/* <button className="btn btn-lg btn-primary btn-block"
+                                onClick={e => { this.checkCookie(e) }}>验证cookie</button> */}
                         </div>
                     </div>
                 </div>

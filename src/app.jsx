@@ -7,6 +7,8 @@ import Login from 'page/login/login.jsx';
 import Error from 'page/error/index.jsx';
 import Layout from 'component/layout/index.jsx';
 import Schedule from 'page/schedule/index.jsx';
+import ScheduleRouter from 'page/schedule/router.jsx';
+import AddSchedule from 'page/schedule/add.jsx';
 import User from 'page/user/index.jsx';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -23,7 +25,7 @@ class App extends React.Component {
                         <Layout>
                             <Switch>
                                 <Route exact path="/" component={Home} />
-                                <Route path="/schedule" component={Schedule} />
+                                <Route path="/schedule" component={ScheduleRouter} />
                                 <Route path="/user" component={User} />
                                 <Route component={Error} />
                             </Switch>

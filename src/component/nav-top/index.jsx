@@ -13,13 +13,21 @@ class NavTop extends React.Component {
     }
 
     componentWillMount() {
-        let str = sessionStorage.getItem('userInfo');
-        if (str == null) {
+        let n_cookie = document.cookie;
+        if (n_cookie == null) {
             return
         }
-        var userInfo = JSON.parse(str);
+        let str = sessionStorage.getItem('userInfo');
+        if (str == null) {
+            this.setState({
+                username: 'admin'
+            });
+            return 
+        }
+        let user = JSON.parse(str);
+        console.log(user);
         this.setState({
-            username: userInfo.name
+            username: user.name
         });
     }
 
@@ -27,10 +35,10 @@ class NavTop extends React.Component {
         axios.post(`/api/logout`)
             .then(res => {
                 console.log("logout success.");
-                sessionStorage.removeItem('userInfo');
             }).catch(err => {
                 alert('logout failed!');
             });
+        sessionStorage.removeItem('userInfo');
     }
 
     render() {

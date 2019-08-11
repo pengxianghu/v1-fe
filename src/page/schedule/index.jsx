@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 
 import PageTitle from 'component/page-title/index.jsx';
+import ScheduleState from 'component/schedule-state/index.jsx';
 
 import './index.scss';
 
@@ -11,21 +13,22 @@ class Schedule extends React.Component {
         this.state = {
             to_do_list: [],
             user_id: '',
-            topic: '',
-            content: ''
         }
     }
 
     componentWillMount() {
-        let str = sessionStorage.getItem('userInfo');
-        if (str == null) {
+        let n_cookie = document.cookie;
+        if (n_cookie.length == 0) {
             return
         }
-        var userInfo = JSON.parse(str);
-        let u_id =  userInfo.id.slice(11);
+        let u_id = n_cookie.slice(23);
         this.setState({
-            user_id: userInfo.id.slice(11)
+            user_id: u_id
         })
+        this.getScheduleByUser(u_id);
+    }
+
+    getScheduleByUser(u_id) {
         axios.get(`/api/schedule/` + u_id)
             .then(res => {
                 console.log("get schedule by user success");
@@ -35,41 +38,14 @@ class Schedule extends React.Component {
             });
     }
 
-    topicValueChange(e) {
-        this.setState({
-            topic: e.target.value
-        })
-    }
-
-    contentValueChange(e) {
-        this.setState({
-            content: e.target.value
-        })
-    }
-
-    addHandleClick() {
-        console.log("topic: " + this.state.topic);
-        console.log("content: " + this.state.content);
-
-        let data = { id: 0, user_id: this.state.user_id, topic: this.state.topic, content: this.state.content }
-        axios.post(`/api/schedule`, data)
-            .then(res => {
-                if (res.data.code == 0) {
-                    console.log("add schedule success.");
-                    alert('添加成功!');
-                    window.location.reload();
-                }
-            });
-    }
-
     deleteScheduleHandleClick(id) {
         console.log("delete schedule by id: " + id);
         axios.delete(`/api/schedule/` + id)
             .then(res => {
-                if(res.data.code == 0) {
+                if (res.data.code == 0) {
                     console.log("delete schedule success.");
                     alert('删除成功!');
-                    window.location.reload();
+                    this.getScheduleByUser(this.state.user_id);
                 }
             });
     }
@@ -81,12 +57,17 @@ class Schedule extends React.Component {
                 <td>{schedule.topic}</td>
                 <td>{schedule.content}</td>
                 <td>{schedule.created_at}</td>
-                <td>{schedule.status}</td>
+                <td><ScheduleState state={schedule.status} /></td>
                 <td><button className="btn btn-danger btn-sm" onClick={e => { this.deleteScheduleHandleClick(schedule.id, e) }}>删除</button></td>
             </tr>);
         return (
             <div id="page-wrapper">
                 <PageTitle title="待办事项" />
+                <div>
+                    <button className='btn btn-default'>
+                        <NavLink exact to="/schedule/add">添加</NavLink>
+                    </button>
+                </div>
                 <div>
                     <table className="table">
                         <thead>
@@ -103,23 +84,6 @@ class Schedule extends React.Component {
                             {list}
                         </tbody>
                     </table>
-                </div>
-                <div className="form-horizontal">
-                    <div className="form-group">
-                        <label className="col-md-2 control-label">主题:</label>
-                        <div className="col-md-4">
-                            <input type="text" className="form-control form-input" onChange={e => this.topicValueChange(e)} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label className="col-md-2 control-label">内容:</label>
-                        <div className="col-md-6">
-                            <textarea className="form-control" rows="3" onChange={e => this.contentValueChange(e)}></textarea>
-                        </div>
-                    </div>
-                    <div>
-                        <button className='btn btn-default offset-md-6 col-md-1' onClick={e => { this.addHandleClick(e) }}>添加</button>
-                    </div>
                 </div>
             </div>
         );

@@ -1,17 +1,19 @@
-import React            from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Redirect, Route, Link } from 'react-router-dom'
 
 // 页面
-import ToDoList from './index.jsx';
+import Schedule from './index.jsx';
+import AddSchedule from './add.jsx';
 
-class ToDoListRouter extends React.Component{
-    render(){
+class ScheduleRouter extends React.Component {
+    render() {
         return (
             <Switch>
-                <Route path="/to-do-list" component={ToDoList}/>
-                <Redirect exact from="/to-do" to="/to-do-list"/>
+                <Route path="/schedule/index" component={Schedule} />
+                <Route path="/schedule/add" component={AddSchedule} />
+                <Redirect exact from="/schedule" to="/schedule/index" />
             </Switch>
         )
     }
 }
-export default ToDoListRouter;
+export default ScheduleRouter;

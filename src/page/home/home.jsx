@@ -1,6 +1,7 @@
 import React from 'react';
 
 import PageTitle from 'component/page-title/index.jsx';
+import Minion from '../../a.jpg';
 
 class Home extends React.Component {
     constructor(props) {
@@ -11,8 +12,8 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
-        let str = sessionStorage.getItem('userInfo');
-        if (str == null) {
+        let cookie = document.cookie;
+        if (cookie.length == 0) {
             window.location.href = "/login";
         }
     }
@@ -21,6 +22,7 @@ class Home extends React.Component {
         return (
             <div id="page-wrapper">
                 <PageTitle title="主页" />
+                <img src={Minion} />
             </div>
         );
     }
