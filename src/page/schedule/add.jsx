@@ -1,3 +1,10 @@
+/*
+ * @Description: add schedule component
+ * @Autor: pengxianghu
+ * @Date: 2019-08-11 09:24:03
+ * @LastEditTime: 2019-08-17 21:12:59
+ */
+
 import React from 'react';
 import axios from 'axios';
 
@@ -72,8 +79,8 @@ class AddSchedule extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-2 offset-md-2">
-                            <button className='btn btn-default' onClick={e => { this.addHandleClick(e) }}>添加</button>
+                        <div className="col-md-2 col-md-offset-2">
+                            <button className='btn btn-default' onClick={e => { this.addHandleClick(e) }}>添加</button>&nbsp;
                             <button className='btn btn-default' onClick={e => this.goBackClick(e)}>返回</button>
                         </div>
                     </div>

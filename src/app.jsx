@@ -15,6 +15,8 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'component/layout/theme.css';
 import './index.css';
 
+import 'element-theme-default';
+
 class App extends React.Component {
     render() {
         return (

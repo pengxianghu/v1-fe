@@ -1,7 +1,18 @@
+/*
+ * @Description: login component
+ * @Autor: pengxianghu
+ * @Date: 2019-08-11 09:24:03
+ * @LastEditTime: 2019-08-17 21:13:09
+ */
+
+
 import React from 'react';
 import axios from 'axios';
 
-axios.defaults.withCredentials = true
+import './login.scss';
+
+axios.defaults.withCredentials = true;
+
 
 class Login extends React.Component {
     constructor(props) {
@@ -13,16 +24,18 @@ class Login extends React.Component {
         }
     }
 
-    nameValueChange(e) {
+    onInputChange(e) {
+        let inputValue = e.target.value,
+            inputName = e.target.name;
         this.setState({
-            name: e.target.value
+            [inputName]: inputValue
         })
     }
 
-    pwdValueChange(e) {
-        this.setState({
-            pwd: e.target.value
-        })
+    onInputKeyUp(e) {
+        if (e.keyCode == 13) {
+            this.submitHandleClick();
+        }
     }
 
     submitHandleClick() {
@@ -59,22 +72,22 @@ class Login extends React.Component {
                         <div>
                             <div className="form-group">
                                 <input type="text"
-                                    name="username"
+                                    name="name"
                                     className="form-control"
                                     placeholder="请输入用户名"
-                                    onChange={e => this.nameValueChange(e)} />
+                                    onKeyUp={e => this.onInputKeyUp(e)}
+                                    onChange={e => this.onInputChange(e)} />
                             </div>
                             <div className="form-group">
                                 <input type="password"
-                                    name="password"
+                                    name="pwd"
                                     className="form-control"
                                     placeholder="请输入密码"
-                                    onChange={e => this.pwdValueChange(e)} />
+                                    onKeyUp={e => this.onInputKeyUp(e)}
+                                    onChange={e => this.onInputChange(e)} />
                             </div>
                             <button className="btn btn-lg btn-primary btn-block"
                                 onClick={e => { this.submitHandleClick(e) }}>登录</button>
-                            {/* <button className="btn btn-lg btn-primary btn-block"
-                                onClick={e => { this.checkCookie(e) }}>验证cookie</button> */}
                         </div>
                     </div>
                 </div>
